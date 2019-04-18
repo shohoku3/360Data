@@ -10,3 +10,22 @@
 - [x] python 实现 base64 转码模块
 - [x] python 模拟浏览器实现在线MD5解密
 - [ ] 无法突破在线查询限制
+
+### 项目结构
+E:.
+│  .gitignore
+│  geckodriver.log
+│  log.py
+│  README.md
+│
+├─OutData
+│  └─log
+│      ├─base64
+│      │      result_col4_*.txt
+│      │
+│      └─domain
+│              result_col2_*.txt
+│
+└─PreData
+    └─log
+            2018-12-**.csv
