@@ -6,7 +6,6 @@
 - Base64： 
 
 ### ToDoList
-- [x] 导入json数据
-- [ ] 导入数据大小限制<16M
-- [ ] excel 数据过大
-- [ ] python 实现 base64 转码模块
+- [x] python 实现 base64 转码模块
+- [ ] 分析http请求方式分辨可能的攻击
+- [ ] 
