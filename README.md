@@ -6,9 +6,16 @@
 - MD5
 - Base64
 
-### ToDoList
-- [x] python 实现 base64 转码模块
-- [x] python 模拟浏览器实现在线MD5解密
-- [x] 无法突破在线查询限制  --模拟登录
-- [ ] 查询数量无法保证
-- [ ] 使用得到的数据进行whois查询
+### ToDoList 4-18
+- [x] python 实现 base64 自动化转码
+- [x] python 模拟浏览器实现 自动化在线MD5解密
+- [ ] 无法突破在线查询限制 
+- [x] 进行whois查询
+- [x] 进行DNS解析 查看CNAME,A
+- [ ] 解析ip地址的位置
+- [ ] 查看网站是否开启CDN 云服务
+
+### Config
+- 修改浏览器 default chrome
+- 修改读取日志文件路径 defaut:.\\PreData
+- 修改中间数据及最终数据
