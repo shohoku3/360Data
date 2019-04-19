@@ -23,17 +23,43 @@
 ### lib
 - 使用GeoLite2-City free数据库 查询ip地址
 
-### 文件结构
-
-'''
-├─lib
-├─OutData
+### 文件结
+```
+E:.
+│  .gitignore							//
+│  base64_post.py 						//base64解密自动化
+│  cname_extract.py 					//CNAME提取程序
+│  dns_parse.py 						//域名解析自动化程序
+│  geckodriver.log 						//浏览器驱动日志
+│  getAddress.py 						//获取物理地址的程序
+│  md5_domain.py 						//破解MD5的自动化程序
+│  README.md  							//使用说明
+│  whois_domain.py 						//whois 自动化程序
+│
+├─lib									//查询域名物理地址的所需的数据库文件
+│      COPYRIGHT.txt
+│      GeoLite2-City.mmdb
+│      LICENSE.txt
+│      README.txt
+│
+├─OutData								//输出数据文件夹
 │  └─log
-│      ├─address
-│      ├─base64
-│      ├─dns_parse
-│      ├─domain
-│      └─whois_info
-└─PreData
+│      ├─address						//域名物理地址的文件夹
+│      │      address_1.txt
+│      │
+│      ├─base64							//解密base64的文件夹
+│      │      base64_post_1.txt
+│      │
+│      ├─dns_parse						//DNS解析的文件夹
+│      │      dns_parse_1.txt
+│      │
+│      ├─domain							//解密MD5的域名文件夹
+│      │      md5_domain_1.txt
+│      │
+│      └─whois_info						//生成whois信息的文件夹
+│              whois_info_1.txt
+│
+└─PreData								//预处理数据的文件夹
     └─log
-'''
+            2018-12-01.csv
+```
