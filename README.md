@@ -23,7 +23,7 @@
 ### lib
 - 使用GeoLite2-City free数据库 查询ip地址
 
-### 文件结构
+### 文件结
 ```
 E:.
 │  .gitignore							//
