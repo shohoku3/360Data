@@ -16,9 +16,8 @@
 - [x] 查看网站是否开启CDN 云服务
 
 ### Config
-- 修改浏览器 default chrome
-- 修改读取日志文件路径 defaut:.\\PreData
-- 修改中间数据及最终数据
+- 浏览器 chrome 用作模拟浏览器
+- 读入的日志文件路径 defaut:.\\PreData\\
 
 ### lib
 - 使用GeoLite2-City free数据库 查询ip地址
