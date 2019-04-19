@@ -22,3 +22,18 @@
 
 ### lib
 - 使用GeoLite2-City free数据库 查询ip地址
+
+### 文件结构
+
+'''
+├─lib
+├─OutData
+│  └─log
+│      ├─address
+│      ├─base64
+│      ├─dns_parse
+│      ├─domain
+│      └─whois_info
+└─PreData
+    └─log
+'''
