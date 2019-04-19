@@ -12,10 +12,13 @@
 - [ ] 无法突破在线查询限制 
 - [x] 进行whois查询
 - [x] 进行DNS解析 查看CNAME,A
-- [ ] 解析ip地址的位置
-- [ ] 查看网站是否开启CDN 云服务
+- [x] 解析ip地址的物理地址
+- [x] 查看网站是否开启CDN 云服务
 
 ### Config
 - 修改浏览器 default chrome
 - 修改读取日志文件路径 defaut:.\\PreData
 - 修改中间数据及最终数据
+
+### lib
+- 使用GeoLite2-City free数据库 查询ip地址

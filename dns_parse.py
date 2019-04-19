@@ -33,4 +33,5 @@ for domainFileNum in range(1):
                     print(host.ljust(40),(str(dns)).ljust(40),attr.ljust(5),id,file=f)
         except Exception as e:
             pass
+            f = open('.\\OutData\\log\\dns_parse\\dns_parse_%s.txt' %(domainFileNum+1), 'a',encoding='utf-8')
             print(host.ljust(40),'Connet Error', file=f)
