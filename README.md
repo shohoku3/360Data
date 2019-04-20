@@ -6,15 +6,29 @@
 - MD5
 - Base64
 
-### ToDoList 4-18
+### ToDoList 
+##### 4-18
 - [x] python 实现 base64 自动化转码
 - [x] python 模拟浏览器实现 自动化在线MD5解密
-- [ ] 无法突破在线查询限制 
+- [ ] 无法突破在线查询限制 测试<50
+##### 4-19 
 - [x] 进行whois查询
 - [x] 进行DNS解析 查看CNAME,A
 - [x] 解析ip地址的物理地址
 - [x] 查看网站是否开启CDN 云服务
-
+- [x] 修复查询物理地址时外国不显示城市
+- [x] 对于物理地址在国外的地址进行标识
+- [x] CNAME 查询那些开启了云服务 云服务厂商是
+##### 4-20
+- [ ] 尝试将运行测试结果合并
+- [x] 尝试利用其它方式破解MD5
+- [x] 成功用其他方式替换在线查询
+- [x] 解决提取程序问题
+- [x] 尝试将提取程序合并
+- [x] 解决提取第三列时提取值为空问题
+- [x] 超时异常处理
+- [x] 超时打印
+- [ ] 尝试将提取与操作程序合并 
 ### Config
 - 浏览器 chrome 用作模拟浏览器
 - 读入的日志文件路径 defaut:.\\PreData\\
@@ -24,41 +38,5 @@
 
 ### 文件结构
 ```
-E:.
-│  .gitignore		//
-│  base64_post.py 		//base64解密自动化
-│  cname_extract.py 	//CNAME提取程序
-│  dns_parse.py 		//域名解析自动化程序
-│  geckodriver.log 		//浏览器驱动日志
-│  getAddress.py 		//获取物理地址的程序
-│  md5_domain.py 		//破解MD5的自动化程序
-│  README.md  			//使用说明
-│  whois_domain.py 		//whois 自动化程序
-│
-├─lib					//查询域名物理地址的所需的数据库文件
-│      COPYRIGHT.txt
-│      GeoLite2-City.mmdb
-│      LICENSE.txt
-│      README.txt
-│
-├─OutData				//输出数据文件夹
-│  └─log
-│      ├─address		//域名物理地址的文件夹
-│      │      address_1.txt
-│      │
-│      ├─base64			//解密base64的文件夹
-│      │      base64_post_1.txt
-│      │
-│      ├─dns_parse		//DNS解析的文件夹
-│      │      dns_parse_1.txt
-│      │
-│      ├─domain			//解密MD5的域名文件夹
-│      │      md5_domain_1.txt
-│      │
-│      └─whois_info		//生成whois信息的文件夹
-│              whois_info_1.txt
-│
-└─PreData				//预处理数据的文件夹
-    └─log
-            2018-12-01.csv
+
 ```

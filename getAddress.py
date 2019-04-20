@@ -7,10 +7,16 @@ refile=open('.\\OutData\\log\\address\\address_1.txt','w',encoding='utf-8')
 def getAddress(ip):
     response = reader.city(ip)
     country = response.country.name
-    city = response.city.names.get('zh-CN', '')
+    #city = response.city.names.get('zh-CN', '')
+    if country=='China':
+        city=response.city.names.get('zh-CN','')
+    else:
+        city=response.city.names.get('en','')
     return country, city
-
-reader = geoip2.database.Reader('.\\lib\\GeoLite2-City.mmdb')
+'''
+test='8.9.4.132'
+print(getAddress(test))
+'''
 hostlist = open('.\\OutData\\log\\dns_parse\\dns_parse_1.txt','r',encoding='utf-8')
 for host in hostlist:
     if host[-2] == '1':
@@ -18,4 +24,4 @@ for host in hostlist:
         result=hostRegex.findall(host)
         res=' '.join(result)
         address=' '.join(getAddress(res))
-        print(str(res).ljust(20),str(address).ljust(20),file=refile)
+        print(host.ljust(50),str(address).ljust(50),file=refile)
