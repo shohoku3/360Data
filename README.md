@@ -28,7 +28,8 @@
 - [x] 解决提取第三列时提取值为空问题
 - [x] 超时异常处理
 - [x] 超时打印
-- [ ] 尝试将提取与操作程序合并 
+- [x] 尝试将提取与操作程序合并 
+- [x] 合并解析程序 
 ### Config
 - 浏览器 chrome 用作模拟浏览器
 - 读入的日志文件路径 defaut:.\\PreData\\
@@ -38,5 +39,34 @@
 
 ### 文件结构
 ```
-
+  .gitignore
+│  geckodriver.log
+│  hashCrack.py  //破解程序
+│  index.py  //负责提取数据的主入口
+│  parse.py  //负责分析数据
+│  README.md //
+│  whois_domain.py  //自动化whois查询
+│
+├─lib //数据库文件
+│      COPYRIGHT.txt
+│      GeoLite2-City.mmdb
+│      LICENSE.txt
+│      README.txt
+│
+├─OutData
+│  └─log
+│      │  col2_1.txt
+│      │  col4_1.txt
+│      │
+│      ├─result
+│      │      result_1.txt
+│      │
+│      └─whois_info
+│              whois_info_1.txt
+│
+├─PreData
+│  └─log
+│          2018-12-01.csv //预处理文件
+└─__pycache__
+        hashCrack.cpython-36.pyc
 ```
