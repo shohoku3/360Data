@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+#该程序为MD5破解程序
+
 import re
 import os
 import requests

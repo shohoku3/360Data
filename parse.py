@@ -2,6 +2,7 @@ from dns.resolver import *
 import geoip2.database
 import re
 
+#该程序为解析程序 负责查询物理地址 查询云服务提供商 dns解析
 print('自动化解析...')
 reader = geoip2.database.Reader('.\\lib\\GeoLite2-City.mmdb')
 #查询物理地址

@@ -2,6 +2,7 @@ import requests
 from selenium import webdriver
 import time
 
+# 该程序为备案信息查询
 print('自动化查询域名的备案信息开始...')
 # TODO:自动化查询域名的备案信息
 for domainNum in range(1):

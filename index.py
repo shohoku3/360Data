@@ -4,6 +4,7 @@ import urllib.parse
 import hashCrack
 import eventlet
 
+#该程序为提取程序 负责第三列域名MD5散列值提取 第五列提取并处理程序	
 eventlet.monkey_patch()
 for csvNum in range(1):
 	LogFile = open('.\\PreData\\log\\2018-12-0%s.csv' % (csvNum + 1), encoding='UTF-8')
