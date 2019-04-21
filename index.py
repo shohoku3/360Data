@@ -18,7 +18,7 @@ for csvNum in range(1):
 				if len(str(col2[i]))>3:
 					try:
 						hashval=col2[i]
-						with eventlet.Timeout(10,False):
+						with eventlet.Timeout(30,False):
 							demd5 = hashCrack.crack(hashval)
 							f.write(demd5+'.')
 							continue
