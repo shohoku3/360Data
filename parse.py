@@ -16,20 +16,9 @@ def getAddress(ip):
         city=response.city.names.get('en','')
     return country ,city
 
-#云服务提供商
-def searchCdn(host):
-    if '360cloudwaf' in host or '360safeedns.com' in host:
-        product='360云服务'
-    if 'powercdn.cn' in host:
-        product='动力在线'
-    if 'yunjiasu-cdn' in host:
-        product='百度云加速'
-    if 'cname.365cyd.cn' in host or 'cdn.jiashule.' in host:
-        product='创宇云服务'
-    return product
-
 for domainFileNum in range(1):
-    hostlist = open('.\\OutData\\log\\col2_%s.txt' %(domainFileNum+1),'r', encoding='utf-8')
+    hostlist = open('.\\OutData\\log\\col3_%s.txt' %(domainFileNum+1),'r', encoding='utf-8')
+    f = open('.\\OutData\\log\\result\\result_%s.txt' %(domainFileNum+1), 'w',encoding='utf-8')
     for host in hostlist:
         try:
             host = host.split('\n')[0]
@@ -40,34 +29,45 @@ for domainFileNum in range(1):
             elif 'org' in host:
                 attr = 'org'
             else:
-                attr='other'  
-#查询A记录、CNAME记录 #ID 0:CNAME 1:A记录
+                attr='other'         
+            #查询A记录、CNAME记录 #ID 0:CNAME 1:A记录
             a = query(host)
+            FLAG=0
             for dns in a.response.answer:
+                print(FLAG)
                 if 'CNAME' in str(dns):
-                    record='CANME'
-                    cdn=searchCdn(str(dns))
-                    address=''
+                    cdnRegex=re.compile(r'[a-z0-9]{5,}\.[a-z0-9]{5,}\.com')
+                    cdnre=cdnRegex.findall(str(dns))
+                    cdnhost=''.join(cdnre)
+                    if '360cloudwaf' in cdnhost  or '360safeedns.com' in cdnhost:
+                        cdn='360云服务'
+                    elif 'powercdn.cn' in cdnhost:
+                        cdn='动力在线'
+                    f.write(host.ljust(10)+' '+cdnhost.ljust(10)+' '+cdn.ljust(10))
+                    FLAG=1
                 elif 'A' in str(dns):
-                    record='A'
-                    cdn=''
-                    hostRegex=re.compile(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')
-                    result=hostRegex.findall(str(dns))
-                    res=' '.join(result)
-                    address=' '.join(getAddress(res))
-                for dns in dns.items:
-                    f = open('.\\OutData\\log\\result\\result_%s.txt' %(domainFileNum+1), 'a',encoding='utf-8')
-                    print(host.ljust(40), (str(dns)).ljust(40),cdn.ljust(10),address.ljust(10),attr.ljust(10),record.ljust(10), file=f)
+                    if FLAG==1:
+                        record='A and CNAME'
+                        hostRegex=re.compile(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')
+                        result=hostRegex.findall(str(dns))
+                        res=' '.join(result)
+                        address=' '.join(getAddress(res))
+                        f.write(' '+res.ljust(10)+' '+address.ljust(10)+' '+attr.ljust(10)+' '+record.ljust(10)+' ')
+                        FLAG=0
+                    else:
+                        cdnhost='Null'
+                        record='A'
+                        hostRegex=re.compile(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')
+                        result=hostRegex.findall(str(dns))
+                        res=' '.join(result)
+                        address=' '.join(getAddress(res))
+                        cdn='Null'
+                        f.write(host.ljust(10)+' '+cdnhost.ljust(10)+' '+cdn.ljust(10)+' '+res.ljust(10)+' '+address.ljust(10)+' '+attr.ljust(10)+' '+record.ljust(10)+' ')
 #泛解析查询
             host = 'sanshibuing.'+ host
             b=query(host)
-            for dns in b.response.answer:
-                for dns in dns.items:
-                    pass 
-                    id=2
-                    f = open('.\\OutData\\log\\result\\result_%s.txt' %(domainFileNum+1), 'a',encoding='utf-8')
-                    print(host.ljust(40),(str(dns)).ljust(40),attr.ljust(10),id,file=f)
+            if b: 
+                f.write('已经开启泛解析'+'\n')
         except Exception as e:
             pass
-            f = open('.\\OutData\\log\\result\\result_%s.txt' %(domainFileNum+1), 'a',encoding='utf-8')
-            print(host.ljust(40),'Connet Error', file=f)
+            f.write('未开启泛解析'+' '+str(e).ljust(10)+'\n')
