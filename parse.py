@@ -34,7 +34,6 @@ for domainFileNum in range(1):
             a = query(host)
             FLAG=0
             for dns in a.response.answer:
-                print(FLAG)
                 if 'CNAME' in str(dns):
                     cdnRegex=re.compile(r'[a-z0-9]{5,}\.[a-z0-9]{5,}\.com')
                     cdnre=cdnRegex.findall(str(dns))
@@ -43,7 +42,7 @@ for domainFileNum in range(1):
                         cdn='360云服务'
                     elif 'powercdn.cn' in cdnhost:
                         cdn='动力在线'
-                    f.write(host.ljust(10)+' '+cdnhost.ljust(10)+' '+cdn.ljust(10))
+                    f.write(host+','+cdnhost+','+cdn)
                     FLAG=1
                 elif 'A' in str(dns):
                     if FLAG==1:
@@ -52,7 +51,7 @@ for domainFileNum in range(1):
                         result=hostRegex.findall(str(dns))
                         res=' '.join(result)
                         address=' '.join(getAddress(res))
-                        f.write(' '+res.ljust(10)+' '+address.ljust(10)+' '+attr.ljust(10)+' '+record.ljust(10)+' ')
+                        f.write(','+res+','+address+','+attr+','+record+',')
                         FLAG=0
                     else:
                         cdnhost='Null'
@@ -62,12 +61,12 @@ for domainFileNum in range(1):
                         res=' '.join(result)
                         address=' '.join(getAddress(res))
                         cdn='Null'
-                        f.write(host.ljust(10)+' '+cdnhost.ljust(10)+' '+cdn.ljust(10)+' '+res.ljust(10)+' '+address.ljust(10)+' '+attr.ljust(10)+' '+record.ljust(10)+' ')
+                        f.write(host+','+cdnhost+','+cdn+','+res+','+address+','+attr+','+record+',')
 #泛解析查询
             host = 'sanshibuing.'+ host
             b=query(host)
             if b: 
-                f.write('已经开启泛解析'+'\n')
+                f.write('已经开启泛解析'+','+'\n')
         except Exception as e:
             pass
-            f.write('未开启泛解析'+' '+str(e).ljust(10)+'\n')
+            f.write(str(e)+','+'\n')
