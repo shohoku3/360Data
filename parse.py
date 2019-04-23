@@ -20,6 +20,7 @@ for domainFileNum in range(1):
     hostlist = open('.\\OutData\\log\\col3_%s.txt' %(domainFileNum+1),'r', encoding='utf-8')
     f = open('.\\OutData\\log\\result\\result_%s.txt' %(domainFileNum+1), 'w',encoding='utf-8')
     for host in hostlist:
+        print(host+'开始解析')
         try:
             host = host.split('\n')[0]
             if 'gov.cn' in host:
@@ -35,13 +36,15 @@ for domainFileNum in range(1):
             FLAG=0
             for dns in a.response.answer:
                 if 'CNAME' in str(dns):
-                    cdnRegex=re.compile(r'[a-z0-9]{5,}\.[a-z0-9]{5,}\.com')
+                    cdnRegex=re.compile(r'[a-z0-9]{5,}\.[a-z0-9]{3,}\.?[a-z0-9]{3,}\.com\.')
                     cdnre=cdnRegex.findall(str(dns))
                     cdnhost=''.join(cdnre)
                     if '360cloudwaf' in cdnhost  or '360safeedns.com' in cdnhost:
                         cdn='360云服务'
                     elif 'powercdn.cn' in cdnhost:
                         cdn='动力在线'
+                    else:
+                        cdn='其他'
                     f.write(host+','+cdnhost+','+cdn)
                     FLAG=1
                 elif 'A' in str(dns):
@@ -54,13 +57,13 @@ for domainFileNum in range(1):
                         f.write(','+res+','+address+','+attr+','+record+',')
                         FLAG=0
                     else:
-                        cdnhost='Null'
+                        cdnhost='null'
                         record='A'
                         hostRegex=re.compile(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')
                         result=hostRegex.findall(str(dns))
                         res=' '.join(result)
                         address=' '.join(getAddress(res))
-                        cdn='Null'
+                        cdn='null'
                         f.write(host+','+cdnhost+','+cdn+','+res+','+address+','+attr+','+record+',')
 #泛解析查询
             host = 'sanshibuing.'+ host
@@ -68,5 +71,9 @@ for domainFileNum in range(1):
             if b: 
                 f.write('已经开启泛解析'+','+'\n')
         except Exception as e:
-            pass
-            f.write(str(e)+','+'\n')
+            if 'The DNS operation timed out after' in str(e):
+                f.write(host+','+'null'+','+'null'+','+'null'+','+'null'+','+'null'+','+'null'+','+str(e)+','+host+'\n')
+            elif 'None of DNS query names exist: www.' in str(e):
+                f.write(host+','+'null'+','+'null'+','+'null'+','+'null'+','+'null'+','+'null'+','+str(e)+'\n')
+            else:
+                f.write(str(e)+','+'\n')
